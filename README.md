@@ -10,7 +10,11 @@ other diff-tool.
 
 This is copy+paste code, use it only temporarily.
 
+The code uses [sys.settrace()](https://docs.python.org/3/library/sys.html#sys.settrace) from the standard library
+and [PySnooper](https://github.com/cool-RR/PySnooper) which you can install via `pip install pysnooper`.
+
 ```
+        from pysnooper.tracer import get_path_and_source_from_frame
         stream = io.open('/tmp/out-%s.log' % sys.version.split()[0], 'wt', encoding='utf8')
         def tracer(frame, event, arg):
             filename, source = get_path_and_source_from_frame(frame)
