@@ -35,3 +35,14 @@ This is copy+paste code, use it only temporarily.
                 return True
         sys.settrace(tracer)
 ```
+
+
+# Related
+
+* [Güttli's opinionated Programming Guidelines](https://github.com/guettli/programming-guidelines)
+* [Güttli's opinionated Python Tips](https://github.com/guettli/python-tips)
+* [Güttli working-out-loud](https://github.com/guettli/wol)
+
+
+
+
