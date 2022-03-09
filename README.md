@@ -15,27 +15,28 @@ and [PySnooper](https://github.com/cool-RR/PySnooper) which you can install via 
 
 ```
         from pysnooper.tracer import get_path_and_source_from_frame
-        stream = io.open('/tmp/out-%s.log' % sys.version.split()[0], 'wt', encoding='utf8')
+                stream = io.open('/tmp/out-%s.log' % sys.version.split()[0], 'wt', encoding='utf8')
         def tracer(frame, event, arg):
             filename, source = get_path_and_source_from_frame(frame)
             if skip_filename(filename):
                 return
             filename = truncate_filename(filename)
             source_line = source[frame.f_lineno - 1]
-            if filename.startswith('<'):
-                return
             stream.write('{event}, {filename}:{line_number} {source_line}\n'.format(
                 event=event, filename=filename, source_line=source_line, line_number=frame.f_lineno))
             return tracer
 
         def truncate_filename(filename):
-            for remove in ['/home/me/foo/projects/']:
+            for remove in ['/home/me/foo/projects/']: # modify this to fit your liking
                 filename = filename.replace(remove, '')
             return filename
 
         def skip_filename(filename):
+            if filename.startswith('<'):
+                return True
             if 'lib/python' in filename:
                 # Skip /usr/lib/ and lib/python/site-packages
+                # I only want to trace my code.
                 return True
         sys.settrace(tracer)
 ```
